@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="page">
+
+    <header class="site-header">
+      <div class="header-tag">// BUILD YOUR PROFILE</div>
+      <h1 class="site-title">CV <em>Generator</em></h1>
+      <p class="site-sub">Fill in the panels — get a polished CV instantly.</p>
+    </header>
+
+    <form action="generate_cv.php" method="POST" enctype="multipart/form-data" class="cv-form">
+
+      <div class="panels">
+
+        <div class="panel panel-photo" style="--delay:0s">
+          <div class="panel-header">
+            <span class="panel-num">01</span>
+            <span class="panel-title">Profile Photo</span>
+          </div>
+
+          <div class="photo-ring" id="photoRing">
+            <img id="photoPreview" src="" alt="" style="display:none"/>
+            <div class="photo-placeholder" id="photoPlaceholder">
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="30" r="16" fill="#444"/>
+                <ellipse cx="40" cy="66" rx="26" ry="18" fill="#444"/>
+              </svg>
+            </div>
+          </div>
+
+          <label class="btn-pink photo-btn" for="photo">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload Photo
+          </label>
+          <input type="file" id="photo" name="photo" accept="image/*" style="display:none"/>
+        </div>
+
+        <div class="panel panel-info" style="--delay:.08s">
+          <div class="panel-header">
+            <span class="panel-num">02</span>
+            <span class="panel-title">Basic Information</span>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>First Name</label>
+              <input type="text" name="firstname" placeholder="e.g. Juan" required/>
+            </div>
+            <div class="field">
+              <label>Last Name</label>
+              <input type="text" name="lastname" placeholder="e.g. dela Cruz" required/>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Job Title</label>
+            <input type="text" name="job_title" placeholder="e.g. Web Developer"/>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Phone</label>
+              <input type="text" name="phone" placeholder="+63 912 345 6789"/>
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="you@example.com" required/>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Address</label>
+              <input type="text" name="location" placeholder="e.g. Cebu City"/>
+            </div>
+            <div class="field">
+              <label>LinkedIn / Portfolio</label>
+              <input type="url" name="linkedin" placeholder="https://..."/>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Summary</label>
+            <textarea name="summary" rows="3" placeholder="Brief intro about yourself..."></textarea>
+          </div>
+        </div>
+
+        <div class="panel panel-skills" style="--delay:.16s">
+          <div class="panel-header">
+            <span class="panel-num">03</span>
+            <span class="panel-title">Skills & Education</span>
+          </div>
+
+          <div class="sub-section">
+            <div class="sub-label">Skills</div>
+            <div class="field">
+              <label>Skills <small>(comma-separated)</small></label>
+              <textarea name="skills" rows="3" placeholder="HTML, CSS, PHP, MySQL..."></textarea>
+            </div>
+          </div>
+
+          <div class="divider-h"></div>
+
+          <div class="sub-section">
+            <div class="sub-label">Education</div>
+            <div class="field">
+              <label>School / University</label>
+              <input type="text" name="school" placeholder="e.g. University of the Philippines"/>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label>Degree / Course</label>
+                <input type="text" name="degree" placeholder="BS Computer Science"/>
+              </div>
+              <div class="field">
+                <label>Year</label>
+                <input type="text" name="grad_year" placeholder="2025"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-work" style="--delay:.24s">
+          <div class="panel-header">
+            <span class="panel-num">04</span>
+            <span class="panel-title">Work Experience</span>
+          </div>
+
+          <div class="field">
+            <label>Company / Organization</label>
+            <input type="text" name="company" placeholder="e.g. XYZ Corp"/>
+          </div>
+          <div class="field">
+            <label>Period</label>
+            <input type="text" name="job_period" placeholder="June 2024 – Present"/>
+          </div>
+          <div class="field">
+            <label>Responsibilities</label>
+            <textarea name="job_desc" rows="5" placeholder="Describe your key responsibilities and achievements..."></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-footer">
+        <button type="submit" class="btn-submit">
+          <span>Generate CV</span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    const input = document.getElementById('photo');
+    const preview = document.getElementById('photoPreview');
+    const placeholder = document.getElementById('photoPlaceholder');
+    const ring = document.getElementById('photoRing');
+
+    input.addEventListener('change', () => {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+        ring.classList.add('has-photo');
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.querySelectorAll('.panel').forEach((p, i) => {
+      p.style.animationDelay = p.style.getPropertyValue('--delay');
+    });
+  </script>
+</body>
+</html>
